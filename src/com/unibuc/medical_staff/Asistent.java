@@ -1,10 +1,10 @@
 package com.unibuc.medical_staff;
 
-public class Psihiatru extends CadruMedical{
+public class Asistent extends CadruMedical {
     private int experienceLevel;
-    static final double[] payBonus = {4, 9, 14, 19};
+    static final double[] payBonus = {3, 5, 7, 10};
 
-    public Psihiatru(String n, String g, String add, int a, double base_salary, int el) {
+    public Asistent(String n, String g, String add, int a, double base_salary, int el) {
         super(n, g, add, a, base_salary);
         this.experienceLevel = el;
     }
@@ -16,7 +16,7 @@ public class Psihiatru extends CadruMedical{
 
     @Override
     public String toString() {
-        return "Medic Psihiatru \n" +
+        return "Asistenta \n" +
                 " ID: " + idMedic + '\n' +
                 " Nume: " + name + '\n' +
                 " Gen: " + gender + '\n' +

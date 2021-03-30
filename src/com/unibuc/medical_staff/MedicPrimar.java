@@ -16,6 +16,19 @@ public class MedicPrimar extends CadruMedical{
         return baseSalary + baseSalary * payBonus[experienceLevel]/100;
     }
 
+    @Override
+    public String toString() {
+        return "Medic Primar \n" +
+                " ID: " + idMedic + '\n' +
+                " Nume: " + name + '\n' +
+                " Gen: " + gender + '\n' +
+                " Adresa: " + address + '\n' +
+                " Varsta: " + age + '\n' +
+                " Grad Experienta: " + experienceLevel + '\n' +
+                " Specializare: " + specialty + '\n' +
+                "----------\n";
+    }
+
     public String getSpecialty() {
         return specialty;
     }
