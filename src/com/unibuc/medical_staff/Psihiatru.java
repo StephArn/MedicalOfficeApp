@@ -26,6 +26,12 @@ public class Psihiatru extends CadruMedical{
                 "----------\n";
     }
 
+    @Override
+    public void showMedicalStaff() {
+        System.out.println(toString());
+        System.out.println(" Salariu: " + calculateSalary() + "\n----------\n");
+    }
+
     public int getExperienceLevel() {
         return experienceLevel;
     }

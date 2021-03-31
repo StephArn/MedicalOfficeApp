@@ -16,4 +16,17 @@ public class PacientSanatateFizica extends Pacient{
     public void setInsuranceID(String insuranceID) {
         this.insuranceID = insuranceID;
     }
+
+    @Override
+    public String toString() {
+        return "Pacient Sectia Sanatate Fizica \n" +
+                " ID: " + idPacient + '\n' +
+                " Nume: " + name + '\n' +
+                " Gen: " + gender + '\n' +
+                " Adresa: " + address + '\n' +
+                " Varsta: " + age + '\n' +
+                " CNP: " + idCard + '\n' +
+                " Card de Sanatate: " + insuranceID + '\n' +
+                "----------\n";
+    }
 }

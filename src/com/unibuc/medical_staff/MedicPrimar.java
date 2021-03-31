@@ -1,13 +1,13 @@
 package com.unibuc.medical_staff;
 
 public class MedicPrimar extends CadruMedical{
-    private String specialty;
+    private String specialisation;
     private int experienceLevel;
     static final double[] payBonus = {5, 10, 15, 20};
 
-    public MedicPrimar(String n, String g, String add, int a, double base_salary, String specialty, int el) {
+    public MedicPrimar(String n, String g, String add, int a, double base_salary, String specialisation, int el) {
         super(n, g, add, a, base_salary);
-        this.specialty = specialty;
+        this.specialisation = specialisation;
         this.experienceLevel = el;
     }
 
@@ -25,16 +25,22 @@ public class MedicPrimar extends CadruMedical{
                 " Adresa: " + address + '\n' +
                 " Varsta: " + age + '\n' +
                 " Grad Experienta: " + experienceLevel + '\n' +
-                " Specializare: " + specialty + '\n' +
+                " Specializare: " + specialisation + '\n' +
                 "----------\n";
     }
 
-    public String getSpecialty() {
-        return specialty;
+    @Override
+    public void showMedicalStaff() {
+        System.out.println(toString());
+        System.out.println(" Salariu: " + calculateSalary() + "\n----------\n");
     }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
+    public String getspecialisation() {
+        return specialisation;
+    }
+
+    public void setspecialisation(String specialisation) {
+        this.specialisation = specialisation;
     }
 
     public int getExperienceLevel() {

@@ -25,6 +25,8 @@ public abstract class CadruMedical {
 
     public abstract double calculateSalary();
 
+    public abstract void showMedicalStaff();
+
     public String getName() {
         return name;
     }

@@ -21,6 +21,8 @@ public abstract class Pacient {
         this.age = age;
     }
 
+    //public abstract void showPatient();
+
     public String getName() {
         return name;
     }

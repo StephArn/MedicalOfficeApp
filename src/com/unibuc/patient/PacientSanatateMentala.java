@@ -1,5 +1,7 @@
 package com.unibuc.patient;
 
+import java.util.Arrays;
+
 public class PacientSanatateMentala extends Pacient{
 
     private String previousDiagnostic;
@@ -34,5 +36,19 @@ public class PacientSanatateMentala extends Pacient{
 
     public void setMedication(String[] medication) {
         this.medication = medication;
+    }
+
+    @Override
+    public String toString() {
+        return "Pacient Sectia Sanatate Fizica \n" +
+                " ID: " + idPacient + '\n' +
+                " Nume: " + name + '\n' +
+                " Gen: " + gender + '\n' +
+                " Adresa: " + address + '\n' +
+                " Varsta: " + age + '\n' +
+                " CNP: " + idCard + '\n' +
+                " Diagnostic anterior: " + previousDiagnostic + '\n' +
+                " Medicamente: " + Arrays.toString(medication) + '\n' +
+                "----------\n";
     }
 }
