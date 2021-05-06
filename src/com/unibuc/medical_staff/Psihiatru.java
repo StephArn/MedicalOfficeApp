@@ -4,8 +4,8 @@ public class Psihiatru extends CadruMedical{
     private int experienceLevel;
     static final double[] payBonus = {4, 9, 14, 19};
 
-    public Psihiatru(String n, String g, String add, int a, double base_salary, int el) {
-        super(n, g, add, a, base_salary);
+    public Psihiatru(String n, String g, String add, int a, double baseSalary, int el) {
+        super(n, g, add, a, baseSalary);
         this.experienceLevel = el;
     }
 

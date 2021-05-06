@@ -4,8 +4,8 @@ public class Asistent extends CadruMedical {
     private int experienceLevel;
     static final double[] payBonus = {3, 5, 7, 10};
 
-    public Asistent(String n, String g, String add, int a, double base_salary, int el) {
-        super(n, g, add, a, base_salary);
+    public Asistent(String n, String g, String add, int a, double baseSalary, int el) {
+        super(n, g, add, a, baseSalary);
         this.experienceLevel = el;
     }
 

@@ -5,8 +5,8 @@ public class MedicPrimar extends CadruMedical{
     private int experienceLevel;
     static final double[] payBonus = {5, 10, 15, 20};
 
-    public MedicPrimar(String n, String g, String add, int a, double base_salary, String specialisation, int el) {
-        super(n, g, add, a, base_salary);
+    public MedicPrimar(String n, String g, String add, int a, double baseSalary, String specialisation, int el) {
+        super(n, g, add, a, baseSalary);
         this.specialisation = specialisation;
         this.experienceLevel = el;
     }

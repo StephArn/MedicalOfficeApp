@@ -27,17 +27,20 @@ public class Main {
 //        System.out.println(a);
 
         //a.showMedicalStaff();
-        Service.addMedicalStaff();
-        Service.addMedicalStaff();
-        Service.addMedicalStaff();
-        Service.showMedicalStaffList();
-        Service.addPatient();
-        Service.addPatient();
-        Service.showPatients();
-        Service.sortMedicalStaffByAgeAndName();
-        Service.sortPatientsByAgeAndName();
-        Service.showMedicalStaffList();
-        Service.showMedicalStaffList();
+        ServiceProgramare appointments = ServiceProgramare.getInstance();
+        ServiceMedic staff = ServiceMedic.getInstance();
+        ServicePacient patients = ServicePacient.getInstance();
+        staff.addMedicalStaff();
+        staff.addMedicalStaff();
+        staff.addMedicalStaff();
+        staff.showMedicalStaffList();
+        patients.addPatient();
+        patients.addPatient();
+        patients.showPatients();
+        staff.sortMedicalStaffByAgeAndName();
+        patients.sortPatientsByAgeAndName();
+        staff.showMedicalStaffList();
+        patients.showPatients();
 
     }
 }
