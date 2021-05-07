@@ -22,6 +22,11 @@ public abstract class CadruMedical extends Persoana {
         this.baseSalary = baseSalary;
     }
 
+//    @Override
+//    public boolean equals(Object obj) {
+//        return super.equals(obj);
+//    }
+
     public abstract double calculateSalary();
 
     public abstract void showMedicalStaff();

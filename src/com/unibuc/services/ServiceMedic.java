@@ -110,5 +110,15 @@ public class ServiceMedic {
     }
 
 
-
+    public void addMedicalStaffFromCSV(CadruMedical med) {
+        boolean already = false;
+        for (CadruMedical a : staff)
+            if (a.equals(med)) {
+                already = true;
+                break;
+            }
+        if (!already) {
+            staff.add(med);
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package com.unibuc.services;
 
+import com.unibuc.medical_staff.Asistent;
+import com.unibuc.medical_staff.CadruMedical;
 import com.unibuc.patient.*;
 
 import java.util.ArrayList;
@@ -114,5 +116,15 @@ public class ServicePacient {
     }
 
 
-
+    public void addPatientFromCSV(Pacient p) {
+        boolean already = false;
+        for (Pacient a : patients)
+            if (a.equals(p)) {
+                already = true;
+                break;
+            }
+        if (!already) {
+            patients.add(p);
+        }
+    }
 }

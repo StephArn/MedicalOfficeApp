@@ -1,5 +1,6 @@
 package com.unibuc.services;
 
+import com.unibuc.io.ReadCSV;
 import com.unibuc.medical_staff.Asistent;
 import com.unibuc.medical_staff.CadruMedical;
 import com.unibuc.medical_staff.MedicPrimar;
@@ -27,20 +28,28 @@ public class Main {
 //        System.out.println(a);
 
         //a.showMedicalStaff();
-        ServiceProgramare appointments = ServiceProgramare.getInstance();
-        ServiceMedic staff = ServiceMedic.getInstance();
-        ServicePacient patients = ServicePacient.getInstance();
-        staff.addMedicalStaff();
-        staff.addMedicalStaff();
-        staff.addMedicalStaff();
-        staff.showMedicalStaffList();
-        patients.addPatient();
-        patients.addPatient();
-        patients.showPatients();
-        staff.sortMedicalStaffByAgeAndName();
-        patients.sortPatientsByAgeAndName();
-        staff.showMedicalStaffList();
-        patients.showPatients();
+//        ServiceProgramare appointments = ServiceProgramare.getInstance();
+//        ServiceMedic staff = ServiceMedic.getInstance();
+//        ServicePacient patients = ServicePacient.getInstance();
+//        staff.addMedicalStaff();
+//        staff.addMedicalStaff();
+//        staff.addMedicalStaff();
+//        staff.showMedicalStaffList();
+//        patients.addPatient();
+//        patients.addPatient();
+//        patients.showPatients();
+//        staff.sortMedicalStaffByAgeAndName();
+//        patients.sortPatientsByAgeAndName();
+//        staff.showMedicalStaffList();
+//        patients.showPatients();
+
+        ReadCSV in = ReadCSV.getInstance();
+        in.readGPFromCSV();
+        in.readNurseFromCSV();
+        in.readPsychFromCSV();
+        in.readPatientPhysicalFromCSV();
+        in.readPatientMentalFromCSV();
+
 
     }
 }
