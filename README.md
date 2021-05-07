@@ -2,7 +2,7 @@
                            - MedicPrimar
              CadruMedical: - Asistent
                            - Psihiatru
-`* Persoana-|           
+* Persoana-|           
                    
              Pacient: - PacientSanatateFizica
                       - PacientSanatateMentala
