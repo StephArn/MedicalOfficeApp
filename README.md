@@ -1,10 +1,9 @@
-# MedicalOfficeApp
 
                            - MedicPrimar
              CadruMedical: - Asistent
-           /               - Psihiatru
-* Persoana-|           
-           \         
+                           - Psihiatru
+`* Persoana-|           
+                   
              Pacient: - PacientSanatateFizica
                       - PacientSanatateMentala
                       
