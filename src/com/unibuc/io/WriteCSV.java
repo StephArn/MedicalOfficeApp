@@ -9,6 +9,7 @@ import com.unibuc.patient.PacientSanatateMentala;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class WriteCSV {
     private static WriteCSV instance = null;
@@ -18,7 +19,6 @@ public class WriteCSV {
             instance = new WriteCSV();
         return instance;
     }
-
 
     public void writeGPOnCSV(MedicPrimar med) {
         try (var out = new BufferedWriter(new FileWriter("src/com/unibuc/io/med_primar_write.csv",true))) {
@@ -59,6 +59,16 @@ public class WriteCSV {
             System.out.println("Writing Exception: "+ e.getMessage());
         }
     }
+
+    public void writeAudit(String operation) {
+        try (var out = new BufferedWriter(new FileWriter("src/com/unibuc/io/audit.csv", true))) {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            out.write(operation + ", " + timestamp.toString() + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 

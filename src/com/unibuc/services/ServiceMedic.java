@@ -1,5 +1,6 @@
 package com.unibuc.services;
 
+import com.unibuc.io.WriteCSV;
 import com.unibuc.medical_staff.*;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class ServiceMedic {
     }
 
     public ArrayList<CadruMedical> getStaff() {
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Staff");
         return staff;
     }
 
@@ -38,6 +41,8 @@ public class ServiceMedic {
         }
         if (!found)
             System.out.println("Niciun cadru medical cu acest ID!");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Search Staff by ID");
         return as;
     }
 
@@ -45,6 +50,8 @@ public class ServiceMedic {
         System.out.println("Current Medical Staff:");
         for (var med: staff)
             med.showMedicalStaff();
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Show Staff");
     }
 
     public void addMedicalStaff() {
@@ -93,6 +100,8 @@ public class ServiceMedic {
             default:
                 System.out.println("Invalid operation. Try again!");
         }
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Staff on Console");
     }
 
     public void removeMedicalStaffByID() {
@@ -104,6 +113,8 @@ public class ServiceMedic {
         if (med == null)
             return;
         staff.remove(med);
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Remove Staff by ID");
     }
 
     public void sortMedicalStaffByAgeAndName()
@@ -111,6 +122,8 @@ public class ServiceMedic {
         Collections.sort(staff, new ComparatorStaffAge());
         Collections.sort(staff, new ComparatorStaffName());
         System.out.println("Sorted! Display the medical staff list to see the changes.\n");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Sort Staff");
     }
 
 
@@ -124,5 +137,7 @@ public class ServiceMedic {
         if (!already) {
             staff.add(med);
         }
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Staff from CSV");
     }
 }

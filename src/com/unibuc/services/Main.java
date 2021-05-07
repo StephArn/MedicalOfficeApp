@@ -96,7 +96,5 @@ public class Main {
         out.writePsychOnCSV(p);
 
 
-
-
     }
 }

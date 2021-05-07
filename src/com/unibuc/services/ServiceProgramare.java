@@ -1,6 +1,7 @@
 package com.unibuc.services;
 
 import com.unibuc.appointment.*;
+import com.unibuc.io.WriteCSV;
 import com.unibuc.medical_staff.*;
 import com.unibuc.patient.*;
 
@@ -41,6 +42,8 @@ public class ServiceProgramare {
         }
         if (!found)
             System.out.println("Nicio programare cu acest ID!");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Appointments");
         return as;
     }
 
@@ -106,6 +109,8 @@ public class ServiceProgramare {
         appointments.add(prog);
 
         System.out.println("Success!");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Appointment on Console");
     }
 
     public void removeAppointmentByID() {
@@ -117,6 +122,8 @@ public class ServiceProgramare {
         if (med == null)
             return;
         appointments.remove(med);
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Remove Appointment by ID");
     }
 
 

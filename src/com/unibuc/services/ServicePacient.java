@@ -1,5 +1,6 @@
 package com.unibuc.services;
 
+import com.unibuc.io.WriteCSV;
 import com.unibuc.patient.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class ServicePacient {
     }
 
     public ArrayList<Pacient> getPatients() {
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Patients");
         return patients;
     }
 
@@ -39,12 +42,16 @@ public class ServicePacient {
         }
         if (!found)
             System.out.println("Niciun pacient cu acest ID!");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Search Patient by ID");
         return as;
     }
     public void showPatients() {
         System.out.println("Current Patients:");
         for (var pat: patients)
             System.out.println(pat);
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Show Patients");
     }
 
 
@@ -97,6 +104,8 @@ public class ServicePacient {
                 System.out.println("Invalid operation. Try again!");
                 return;
         }
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Patient on Console");
 
     }
 
@@ -109,6 +118,8 @@ public class ServicePacient {
         if (med == null)
             return;
         patients.remove(med);
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Remove Patient");
     }
 
     public void sortPatientsByAgeAndName()
@@ -116,6 +127,8 @@ public class ServicePacient {
         Collections.sort(patients, new ComparatorPatientAge());
         Collections.sort(patients, new ComparatorPatientName());
         System.out.println("Sorted! Display the patients list to see the changes.\n");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Sort Patients");
     }
 
 
@@ -129,5 +142,7 @@ public class ServicePacient {
         if (!already) {
             patients.add(p);
         }
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Patients from CSV");
     }
 }
