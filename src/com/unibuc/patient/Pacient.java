@@ -27,25 +27,25 @@ public abstract class Pacient extends Persoana {
 //        this.name = name;
 //    }
 //
-//    public String getGender() {
-//        return gender;
-//    }
+    public String getGender() {
+        return gender;
+    }
 //
 //    public void setGender(String gender) {
 //        this.gender = gender;
 //    }
-//
-//    public String getAddress() {
-//        return address;
-//    }
+
+    public String getAddress() {
+        return address;
+    }
 //
 //    public void setAddress(String address) {
 //        this.address = address;
 //    }
-//
-//    public String getIdCard() {
-//        return idCard;
-//    }
+
+    public String getIdCard() {
+        return idCard;
+    }
 //
 //    public void setIdCard(String idCard) {
 //        this.idCard = idCard;

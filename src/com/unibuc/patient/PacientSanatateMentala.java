@@ -1,13 +1,13 @@
 package com.unibuc.patient;
 
-import java.util.Arrays;
+import java.util.Vector;
 
 public class PacientSanatateMentala extends Pacient{
 
     private String previousDiagnostic;
     private int nrOfMeds;
-    private String[] medication = new String[nrOfMeds];
-    public PacientSanatateMentala(String name, String gender, String address, String idCard, int age, String diag, int noMeds, String[] meds) {
+    private Vector<String> medication;
+    public PacientSanatateMentala(String name, String gender, String address, String idCard, int age, String diag, int noMeds, Vector<String> meds) {
         super(name, gender, address, idCard, age);
         this.previousDiagnostic = diag;
         this.nrOfMeds = noMeds;
@@ -30,11 +30,11 @@ public class PacientSanatateMentala extends Pacient{
         this.nrOfMeds = noOfMeds;
     }
 
-    public String[] getMedication() {
+    public Vector<String> getMedication() {
         return medication;
     }
 
-    public void setMedication(String[] medication) {
+    public void setMedication(Vector<String> medication) {
         this.medication = medication;
     }
 
@@ -48,7 +48,7 @@ public class PacientSanatateMentala extends Pacient{
                 " Varsta: " + age + '\n' +
                 " CNP: " + idCard + '\n' +
                 " Diagnostic anterior: " + previousDiagnostic + '\n' +
-                " Medicamente: " + Arrays.toString(medication) + '\n' +
+                " Medicamente: " + medication + '\n' +
                 "----------\n";
     }
 }

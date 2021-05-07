@@ -1,12 +1,11 @@
 package com.unibuc.services;
 
-import com.unibuc.medical_staff.Asistent;
-import com.unibuc.medical_staff.CadruMedical;
 import com.unibuc.patient.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class ServicePacient {
 
@@ -22,6 +21,10 @@ public class ServicePacient {
             instance = new ServicePacient();
         }
         return instance;
+    }
+
+    public ArrayList<Pacient> getPatients() {
+        return patients;
     }
 
     public Pacient searchPatientByID (int id) {
@@ -74,16 +77,16 @@ public class ServicePacient {
                 String prev = scanner.next();
                 System.out.print("How many medications do they take? If none, type 0.");
                 int nrmeds = scanner.nextInt();
-                String[] meds;
+                Vector<String> meds;
                 if(nrmeds != 0){
                     System.out.print("State the names of the medications one by one: ");
-                    meds = new String[nrmeds];
+                    meds = new Vector<String>();
                     for(int i = 0; i < nrmeds; i++){
-                        meds[i] = scanner.next();
+                        meds.add(scanner.next());
                     }
                 }
                 else{
-                    meds = new String[]{"-"};
+                    meds = new Vector<String>();
                 }
                 Pacient men = new PacientSanatateMentala(name, gender, address, idCard, age, prev, nrmeds, meds);
                 patients.add(men);

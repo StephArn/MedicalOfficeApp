@@ -11,6 +11,8 @@ import com.unibuc.services.ServicePacient;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Vector;
 
 public class ReadCSV {
     private static ReadCSV instance = null;
@@ -33,7 +35,7 @@ public class ReadCSV {
                 String []fields = line.split(",");
                 med.addMedicalStaffFromCSV(new MedicPrimar(fields[0], fields[1], fields[2],Integer.parseInt(fields[3]), Double.parseDouble(fields[4]), fields[5], Integer.parseInt(fields[6])));
             }
-            med.showMedicalStaffList();
+            //med.showMedicalStaffList();
         } catch (IOException e) {
             System.out.println("Reading Exception GP: "+ e.getMessage());
         }
@@ -49,7 +51,7 @@ public class ReadCSV {
                 String []fields = line.split(",");
                 med.addMedicalStaffFromCSV(new Asistent(fields[0], fields[1], fields[2],Integer.parseInt(fields[3]), Double.parseDouble(fields[4]), Integer.parseInt(fields[5])));
             }
-            med.showMedicalStaffList();
+            //med.showMedicalStaffList();
         } catch (IOException e) {
             System.out.println("Reading Exception Nurse: "+ e.getMessage());
         }
@@ -64,7 +66,7 @@ public class ReadCSV {
                 String []fields = line.split(",");
                 med.addMedicalStaffFromCSV(new Psihiatru(fields[0], fields[1], fields[2],Integer.parseInt(fields[3]), Double.parseDouble(fields[4]), Integer.parseInt(fields[5])));
             }
-            med.showMedicalStaffList();
+            //med.showMedicalStaffList();
         } catch (IOException e) {
             System.out.println("Reading Exception Psychiatrist: "+ e.getMessage());
         }
@@ -80,7 +82,7 @@ public class ReadCSV {
                 pat.addPatientFromCSV(new PacientSanatateFizica(fields[0], fields[1], fields[2],fields[3], Integer.parseInt(fields[4]), fields[5]));
             }
             //System.out.println();
-            pat.showPatients();
+            //pat.showPatients();
         } catch (IOException e) {
             System.out.println("Reading Exception Physical Patient: "+ e.getMessage());
         }
@@ -93,9 +95,9 @@ public class ReadCSV {
 
             while ( (line = in.readLine()) != null) {
                 String []fields = line.split(",");
-                pat.addPatientFromCSV(new PacientSanatateMentala(fields[0], fields[1], fields[2],fields[3], Integer.parseInt(fields[4]), fields[5], Integer.parseInt(fields[6]), fields[7].split(";")));
+                pat.addPatientFromCSV(new PacientSanatateMentala(fields[0], fields[1], fields[2],fields[3], Integer.parseInt(fields[4]), fields[5], Integer.parseInt(fields[6]), new Vector<String>(Arrays.asList(fields[7].split(";")))));
             }
-            pat.showPatients();
+            //pat.showPatients();
         } catch (IOException e) {
             System.out.println("Reading Exception Mental Patient: "+ e.getMessage());
         }

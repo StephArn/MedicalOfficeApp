@@ -22,6 +22,10 @@ public class ServiceMedic {
         return instance;
     }
 
+    public ArrayList<CadruMedical> getStaff() {
+        return staff;
+    }
+
     public CadruMedical searchStaffByID (int id) {
         boolean found = false;
         CadruMedical as = null;

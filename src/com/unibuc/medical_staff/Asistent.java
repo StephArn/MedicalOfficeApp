@@ -32,11 +32,11 @@ public class Asistent extends CadruMedical {
         System.out.println(" Salariu: " + calculateSalary() + "\n----------\n");
     }
 
-    public int getExperienceLevel() {
-        return experienceLevel;
-    }
-
-    public void setExperienceLevel(int experienceLevel) {
-        this.experienceLevel = experienceLevel;
-    }
+//    public int getExperienceLevel() {
+//        return experienceLevel;
+//    }
+//
+//    public void setExperienceLevel(int experienceLevel) {
+//        this.experienceLevel = experienceLevel;
+//    }
 }
