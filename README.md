@@ -4,7 +4,7 @@
                                                   b. Psihiatru  
                                                   c. MedicPrimar   
                              
-                                   2. Pacient:     
+                                  2. Pacient:     
                                                   a. PacientSanatateFizica
                                                   b. PacientSanatateMentala
                       
