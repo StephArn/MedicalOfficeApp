@@ -118,7 +118,7 @@ public class ReadCSV {
 
             while ( (line = in.readLine()) != null) {
                 String []fields = line.split(",");
-                prog.addAppointmentFromCSV(new Programare(med.searchStaffByID(Integer.parseInt(fields[0])), pat.searchPatientByID(Integer.parseInt(fields[1])),fields[2], Date.from(Instant.parse(fields[3])), LocalTime.parse(fields[4])));
+                prog.addAppointmentFromCSV(new Programare(med.searchStaffByID(Integer.parseInt(fields[0])), pat.searchPatientByID(Integer.parseInt(fields[1])),fields[2], (java.sql.Date) java.sql.Date.from(Instant.parse(fields[3])), LocalTime.parse(fields[4])));
             }
         } catch (IOException e) {
             System.out.println("Reading Exception Mental Patient: "+ e.getMessage());

@@ -1,6 +1,9 @@
 package com.unibuc.services;
 
 import com.unibuc.appointment.*;
+import com.unibuc.database.repository.RepoMedic;
+import com.unibuc.database.repository.RepoPacient;
+import com.unibuc.database.repository.RepoProgramare;
 import com.unibuc.io.WriteCSV;
 import com.unibuc.medical_staff.*;
 import com.unibuc.patient.*;
@@ -9,12 +12,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class ServiceProgramare {
+
+    static RepoProgramare repoProgramare = new RepoProgramare();
 
     private ArrayList<Programare> appointments;
     private static ServiceProgramare instance = null;
@@ -105,13 +107,110 @@ public class ServiceProgramare {
         System.out.println("Time (Format as HH'h' MM'm' SS's') : ");
         String time1 = scanner.next();
         LocalTime time = LocalTime.parse(time1, DateTimeFormatter.ofPattern("HH'h 'mm'm 'ss's'"));
-        Programare prog = new Programare(app,p,diag,date,time);
-        appointments.add(prog);
+        //Programare prog = new Programare(app,p,diag,date,time);
+        //appointments.add(prog);
 
         System.out.println("Success!");
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Add Appointment on Console");
     }
+
+    public void addAppointmentGP() throws ParseException {
+        ServiceMedic staff = ServiceMedic.getInstance();
+        ServicePacient patients = ServicePacient.getInstance();
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Data for the appointment: \n");
+        System.out.println("Patient's ID: ");
+        int id = scanner.nextInt();
+        System.out.println("Patient's Diagnostic: ");
+        String diag = scanner.next();
+        PacientSanatateFizica p = patients.getPatPhysFromDBById(id);
+        MedicPrimar app;
+        System.out.println("Choose the GP from the list and type their ID.");
+        System.out.println(staff.getGPsFromDB());
+        int idf = scanner.nextInt();
+        app = staff.getGPFromDBById(idf);
+        System.out.println("Date (Format as dd/MMM/yyyy) : ");
+        String date1 = scanner.next();
+        java.util.Date utilDate = new SimpleDateFormat("dd MMM yyyy").parse(date1);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        System.out.println("Time (Format as HH'h' MM'm' SS's') : ");
+        String time1 = scanner.next();
+        LocalTime time = LocalTime.parse(time1, DateTimeFormatter.ofPattern("HH'h 'mm'm 'ss's'"));
+        Programare prog = new Programare(app,p,diag,sqlDate,time);
+        appointments.add(prog);
+        repoProgramare.saveAppointmentGP(prog);
+
+        System.out.println("Success!");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Appointment for GP DB");
+    }
+
+    public void addAppointmentNurse() throws ParseException {
+        ServiceMedic staff = ServiceMedic.getInstance();
+        ServicePacient patients = ServicePacient.getInstance();
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Data for the appointment: \n");
+        System.out.println("Patient's ID: ");
+        int id = scanner.nextInt();
+        System.out.println("Patient's Diagnostic: ");
+        String diag = scanner.next();
+        PacientSanatateFizica p = patients.getPatPhysFromDBById(id);
+        Asistent app;
+        System.out.println("Choose the Nurse from the list and type their ID.");
+        System.out.println(staff.getNursesFromDB());
+        int idf = scanner.nextInt();
+        app = staff.getNurseFromDBById(idf);
+        System.out.println("Date (Format as dd/MMM/yyyy) : ");
+        String date1 = scanner.next();
+        java.util.Date utilDate = new SimpleDateFormat("dd MMM yyyy").parse(date1);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        System.out.println("Time (Format as HH'h' MM'm' SS's') : ");
+        String time1 = scanner.next();
+        LocalTime time = LocalTime.parse(time1, DateTimeFormatter.ofPattern("HH'h 'mm'm 'ss's'"));
+        Programare prog = new Programare(app,p,diag,sqlDate,time);
+        appointments.add(prog);
+        repoProgramare.saveAppointmentNurse(prog);
+
+        System.out.println("Success!");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Appointment for Nurse on DB");
+    }
+
+    public void addAppointmentPsych() throws ParseException {
+        ServiceMedic staff = ServiceMedic.getInstance();
+        ServicePacient patients = ServicePacient.getInstance();
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Data for the appointment: \n");
+        System.out.println("Patient's ID: ");
+        int id = scanner.nextInt();
+        System.out.println("Patient's Diagnostic: ");
+        String diag = scanner.next();
+        PacientSanatateMentala p = patients.getPatMenFromDBById(id);
+        Psihiatru app;
+        System.out.println("Choose the Nurse from the list and type their ID.");
+        System.out.println(staff.getPsychFromDB());
+        int idf = scanner.nextInt();
+        app = staff.getPsychFromDBById(idf);
+        System.out.println("Date (Format as dd/MMM/yyyy) : ");
+        String date1 = scanner.next();
+        java.util.Date utilDate = new SimpleDateFormat("dd MMM yyyy").parse(date1);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        System.out.println("Time (Format as HH'h' MM'm' SS's') : ");
+        String time1 = scanner.next();
+        LocalTime time = LocalTime.parse(time1, DateTimeFormatter.ofPattern("HH'h 'mm'm 'ss's'"));
+        Programare prog = new Programare(app,p,diag,sqlDate,time);
+        appointments.add(prog);
+        repoProgramare.saveAppointmentPsych(prog);
+
+        System.out.println("Success!");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Appointment for Nurse on DB");
+    }
+
 
     public void removeAppointmentByID() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
@@ -125,6 +224,13 @@ public class ServiceProgramare {
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Remove Appointment by ID");
     }
+
+
+//    public List<Programare> getAppGPFromDB() {
+//        WriteCSV out = WriteCSV.getInstance();
+//        out.writeAudit("Return Physical patients from DB");
+//        return repoProgramare.findAllAppGP();
+//    }
 
     public void addAppointmentFromCSV(Programare prog) {
         boolean already = false;

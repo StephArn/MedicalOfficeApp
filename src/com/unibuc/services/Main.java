@@ -13,6 +13,7 @@ import com.unibuc.patient.PacientSanatateMentala;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
@@ -22,31 +23,6 @@ public class Main {
 //        CadruMedical p = new Psihiatru("Mihail Banea","Masculin","Bucuresti, Aviatiei nr. 56", 46, 9500, 3);
 //        Pacient pf = new PacientSanatateFizica("Andrei Sandulescu", "Masculin", "Bucuresti, Grigore Ureche nr. 32", "5001211220961", 31, "123321445");
 //        Pacient pm = new PacientSanatateMentala("George Grigore", "Masculin", "Bucuresti, Carpatin nr.9", "5991019332567", 21, "autism", 0, new String[]{"-"});
-////        System.out.print(a.calculateSalary());
-//        System.out.println();
-//        System.out.print(mp.calculateSalary());
-//        System.out.println();
-//        System.out.print(p.calculateSalary());
-
-//        System.out.println(pm);
-//        System.out.println(mp);
-//        System.out.println(a);
-
-        //a.showMedicalStaff();
-//        ServiceProgramare appointments = ServiceProgramare.getInstance();
-//        ServiceMedic staff = ServiceMedic.getInstance();
-//        ServicePacient patients = ServicePacient.getInstance();
-//        staff.addMedicalStaff();
-//        staff.addMedicalStaff();
-//        staff.addMedicalStaff();
-//        staff.showMedicalStaffList();
-//        patients.addPatient();
-//        patients.addPatient();
-//        patients.showPatients();
-//        staff.sortMedicalStaffByAgeAndName();
-//        patients.sortPatientsByAgeAndName();
-//        staff.showMedicalStaffList();
-//        patients.showPatients();
 
 //        ReadCSV in = ReadCSV.getInstance();
 //        in.readGPFromCSV();
@@ -104,25 +80,90 @@ public class Main {
         setupData.setup();
 
         ServiceMedic serviceMedic = ServiceMedic.getInstance();
-//        serviceMedic.addGPToDB();
-//        serviceMedic.addNurseToDB();
-//        serviceMedic.addPsychToDB();
-//        System.out.println(serviceMedic.getGPsFromDB());
-//        System.out.println(serviceMedic.getNursesFromDB());
-//        System.out.println(serviceMedic.getPsychFromDB());
-
-        //serviceMedic.changeGPAddress();
+        ServiceProgramare serviceProgramare = ServiceProgramare.getInstance();
         ServicePacient servicePacient = ServicePacient.getInstance();
-//        servicePacient.addPatientPhysicalToDB();
-//        servicePacient.addPatientMentalToDB();
-//        servicePacient.addPatientMentalToDB();
 
-//        System.out.println(servicePacient.getPatPhysFromDB());
-        //System.out.println(servicePacient.getPatMenFromDB());
-        //servicePacient.removePatPhysFromDByID();
-        //serviceMedic.removeGPFromDByID();
-        //servicePacient.removePatMenFromDByID();
-        servicePacient.changePatMenAddress();
+        Scanner in = new Scanner(System.in);
+        int i = in.nextInt();
 
+        while (i != 0)
+        {
+            switch (i) {
+                case 1:
+                    serviceMedic.addGPToDB();
+                    break;
+                case 2:
+                    serviceMedic.addNurseToDB();
+                    break;
+                case 3:
+                    serviceMedic.addPsychToDB();
+                    break;
+                case 4:
+                    servicePacient.addPatientPhysicalToDB();
+                    break;
+                case 5:
+                    servicePacient.addPatientMentalToDB();
+                    break;
+                case 6:
+                    serviceProgramare.addAppointmentGP();
+                    break;
+                case 7:
+                    serviceProgramare.addAppointmentNurse();
+                    break;
+                case 8:
+                    serviceProgramare.addAppointmentPsych();
+                    break;
+                case 9:
+                    System.out.println(serviceMedic.getGPsFromDB());
+                    break;
+                case 10:
+                    System.out.println(serviceMedic.getNursesFromDB());
+                    break;
+                case 11:
+                    System.out.println(serviceMedic.getPsychFromDB());
+                    break;
+                case 12:
+                    serviceMedic.removeGPFromDByID();
+                    break;
+                case 13:
+                    serviceMedic.removeNurseFromDByID();
+                    break;
+                case 14:
+                    serviceMedic.removePsychFromDByID();
+                    break;
+                case 15:
+                    serviceMedic.changeGPAddress();
+                    break;
+                case 16:
+                    serviceMedic.changeNurseAddress();
+                    break;
+                case 17:
+                    serviceMedic.changePsychAddress();
+                    break;
+                case 18:
+                    System.out.println(servicePacient.getPatPhysFromDB());
+                    break;
+                case 19:
+                    System.out.println(servicePacient.getPatMenFromDB());
+                    break;
+                case 20:
+                    servicePacient.removePatPhysFromDByID();
+                    break;
+                case 21:
+                    servicePacient.removePatMenFromDByID();
+                    break;
+                case 22:
+                    servicePacient.changePatPhysAddress();
+                    break;
+                case 23:
+                    servicePacient.changePatMenAddress();
+
+
+            }
+
+            System.out.print("Command:");
+            i = in.nextInt();
+        }
     }
+
 }

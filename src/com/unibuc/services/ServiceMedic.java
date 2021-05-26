@@ -3,6 +3,7 @@ package com.unibuc.services;
 import com.unibuc.database.repository.RepoMedic;
 import com.unibuc.io.WriteCSV;
 import com.unibuc.medical_staff.*;
+import com.unibuc.patient.PacientSanatateFizica;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,6 +50,24 @@ public class ServiceMedic {
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Return Psychs from DB");
         return repoMedic.findAllPsych();
+    }
+
+    public MedicPrimar getGPFromDBById(int id){
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return GP by Id from DB");
+        return repoMedic.findGPById(id);
+    }
+
+    public Asistent getNurseFromDBById(int id){
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Nurse by Id from DB");
+        return repoMedic.findNurseById(id);
+    }
+
+    public Psihiatru getPsychFromDBById(int id){
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Psych by Id from DB");
+        return repoMedic.findPsychById(id);
     }
 
     public CadruMedical searchStaffByID (int id) {
@@ -203,27 +222,16 @@ public class ServiceMedic {
         out.writeAudit("Add Psych to DB");
     }
 
-//    public void removeMedicalStaffByID() {
-//        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-//
-//        System.out.print("Type ID for the staff member you want to remove:");
-//        int del = scanner.nextInt();
-//        CadruMedical med = searchStaffByID(del);
-//        if (med == null)
-//            return;
-//        staff.remove(med);
-//        WriteCSV out = WriteCSV.getInstance();
-//        out.writeAudit("Remove Staff by ID");
-//    }
-
     public void removeGPFromDByID() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         System.out.print("Type ID for the GP you want to remove:");
         int del = scanner.nextInt();
         MedicPrimar med = repoMedic.findGPById(del);
-        if (med == null)
+        if (med == null) {
+            System.out.println("That isn't a valid ID");
             return;
+        }
         repoMedic.deleteGPById(del);
         staff.remove(med);
         WriteCSV out = WriteCSV.getInstance();
@@ -236,8 +244,10 @@ public class ServiceMedic {
         System.out.print("Type ID for the nurse you want to remove:");
         int del = scanner.nextInt();
         Asistent med = repoMedic.findNurseById(del);
-        if (med == null)
+        if (med == null) {
+            System.out.println("That isn't a valid ID");
             return;
+        }
         staff.remove(med);
         repoMedic.deleteNurseById(del);
         WriteCSV out = WriteCSV.getInstance();
@@ -250,8 +260,10 @@ public class ServiceMedic {
         System.out.print("Type ID for the psychiatrist you want to remove: ");
         int del = scanner.nextInt();
         Psihiatru med = repoMedic.findPsychById(del);
-        if (med == null)
+        if (med == null) {
+            System.out.println("That isn't a valid ID");
             return;
+        }
         staff.remove(med);
         repoMedic.deletePsychById(del);
         WriteCSV out = WriteCSV.getInstance();

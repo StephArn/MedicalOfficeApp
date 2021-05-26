@@ -49,12 +49,25 @@ public class ServicePacient {
         out.writeAudit("Search Patient by ID");
         return as;
     }
+
     public void showPatients() {
         System.out.println("Current Patients:");
         for (var pat: patients)
             System.out.println(pat);
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Show Patients");
+    }
+
+    public PacientSanatateFizica getPatPhysFromDBById(int id){
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Physical patient by Id from DB");
+        return repoPacient.findPatientPhysicalById(id);
+    }
+
+    public PacientSanatateMentala getPatMenFromDBById(int id){
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Physical patient by Id from DB");
+        return repoPacient.findPatientMentalById(id);
     }
 
     public List<PacientSanatateFizica> getPatPhysFromDB() {
@@ -194,8 +207,7 @@ public class ServicePacient {
         System.out.print("Type ID for the patient you want to remove:");
         int del = scanner.nextInt();
         Pacient med = searchPatientByID(del);
-        if (med == null)
-            return;
+        if (med == null) return;
         patients.remove(med);
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Remove Patient");
@@ -231,8 +243,10 @@ public class ServicePacient {
         System.out.print("Type ID for the Physical Patient you want to remove:");
         int del = scanner.nextInt();
         PacientSanatateFizica med = repoPacient.findPatientPhysicalById(del);
-        if (med == null)
+        if (med == null) {
+            System.out.println("That isn't a valid ID");
             return;
+        }
         repoPacient.deletePatientPhysicalById(del);
         patients.remove(med);
         WriteCSV out = WriteCSV.getInstance();
@@ -245,10 +259,12 @@ public class ServicePacient {
         System.out.print("Type ID for the Mental Patient you want to remove:");
         int del = scanner.nextInt();
         PacientSanatateMentala med = repoPacient.findPatientMentalById(del);
-        if (med == null)
+        if (med == null) {
+            System.out.println("That isn't a valid ID");
             return;
+        }
         repoPacient.deletePatientMentalById(del);
-        patients.remove(med);
+        //patients.remove(med);
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Remove Mental Pat from DB by ID");
     }

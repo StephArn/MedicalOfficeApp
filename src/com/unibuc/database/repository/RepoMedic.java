@@ -144,7 +144,7 @@ public class RepoMedic {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                med = new Asistent(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDouble(6),resultSet.getInt(8));
+                med = new Asistent(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDouble(6),resultSet.getInt(7));
                 med.setIdMedic(resultSet.getInt("id"));
             }
             resultSet.close();
@@ -162,7 +162,7 @@ public class RepoMedic {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                med = new Psihiatru(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDouble(6),resultSet.getInt(8));
+                med = new Psihiatru(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDouble(6),resultSet.getInt(7));
                 med.setIdMedic(resultSet.getInt("id"));
             }
             resultSet.close();
@@ -321,13 +321,13 @@ public class RepoMedic {
     }
 
     private Asistent mapToAsistent(ResultSet resultSet) throws SQLException {
-        Asistent med = new Asistent(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDouble(6), resultSet.getInt(8));
+        Asistent med = new Asistent(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDouble(6), resultSet.getInt(7));
         med.setIdMedic(resultSet.getInt(1));
         return med;
     }
 
     private Psihiatru mapToPsihiatru(ResultSet resultSet) throws SQLException {
-        Psihiatru med = new Psihiatru(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDouble(6), resultSet.getInt(8));
+        Psihiatru med = new Psihiatru(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getDouble(6), resultSet.getInt(7));
         med.setIdMedic(resultSet.getInt(1));
         return med;
     }

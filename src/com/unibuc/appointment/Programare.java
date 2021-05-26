@@ -10,7 +10,7 @@ public class Programare {
 
     private CadruMedical assignedDoctor;
     private Pacient patient;
-    private Date dateOfAppointment;
+    private java.sql.Date dateOfAppointment;
     private LocalTime timeOfAppointment;
     private String diagnostic;
     protected int idProgramare;
@@ -20,7 +20,7 @@ public class Programare {
         this.idProgramare = ++idIncrement;
     }
 
-    public Programare(CadruMedical assignedDoctor, Pacient patient, String diagnostic, Date date, LocalTime time) {
+    public Programare(CadruMedical assignedDoctor, Pacient patient, String diagnostic, java.sql.Date date, LocalTime time) {
         this.assignedDoctor = assignedDoctor;
         this.patient = patient;
         this.dateOfAppointment = date;
@@ -59,11 +59,11 @@ public class Programare {
         this.patient = patient;
     }
 
-    public Date getDateOfAppointment() {
+    public java.sql.Date getDateOfAppointment() {
         return dateOfAppointment;
     }
 
-    public void setDateOfAppointment(Date dateOfAppointment) {
+    public void setDateOfAppointment(java.sql.Date dateOfAppointment) {
         this.dateOfAppointment = dateOfAppointment;
     }
 

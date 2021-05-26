@@ -4,9 +4,12 @@ import com.unibuc.appointment.Programare;
 import com.unibuc.database.config.DBConfig;
 import com.unibuc.patient.PacientSanatateFizica;
 import com.unibuc.patient.PacientSanatateMentala;
+import com.unibuc.services.ServiceMedic;
+import com.unibuc.services.ServicePacient;
 
 
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -18,13 +21,16 @@ public class RepoProgramare {
         try (Connection connection = DBConfig.getDatabaseConnection()) {
             String query = "INSERT into programari_med_primar" +
                     "(id_medic, id_pacient, data, ora, diagnostic) " +
-                    "VALUES(?,?,?,?)";
+                    "VALUES(?,?,?,?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, prog.getAssignedDoctor().getIdMedic());
             preparedStatement.setInt(2, prog.getPatient().getIdPacient());
-            preparedStatement.setDate(3, (Date) prog.getDateOfAppointment());
+            preparedStatement.setDate(3,  prog.getDateOfAppointment());
             preparedStatement.setObject(4, prog.getTimeOfAppointment(),JDBCType.TIME);
+            preparedStatement.setString(5,prog.getDiagnostic());
+
+            System.out.println(preparedStatement);
 
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -35,7 +41,7 @@ public class RepoProgramare {
             return prog;
 
         } catch (SQLException exception) {
-            throw new RuntimeException("Something went wrong while saving App with GP: " + prog);
+            throw new RuntimeException("Something went wrong while saving App with GP: " + exception.getMessage());
         }
     }
 
@@ -44,13 +50,14 @@ public class RepoProgramare {
         try (Connection connection = DBConfig.getDatabaseConnection()) {
             String query = "INSERT into programari_asist" +
                     "(id_medic, id_pacient, data, ora, diagnostic) " +
-                    "VALUES(?,?,?,?)";
+                    "VALUES(?,?,?,?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, prog.getAssignedDoctor().getIdMedic());
             preparedStatement.setInt(2, prog.getPatient().getIdPacient());
             preparedStatement.setDate(3, (Date) prog.getDateOfAppointment());
             preparedStatement.setObject(4, prog.getTimeOfAppointment(),JDBCType.TIME);
+            preparedStatement.setString(5,prog.getDiagnostic());
 
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -70,13 +77,14 @@ public class RepoProgramare {
         try (Connection connection = DBConfig.getDatabaseConnection()) {
             String query = "INSERT into programari_psih" +
                     "(id_medic, id_pacient, data, ora, diagnostic) " +
-                    "VALUES(?,?,?,?)";
+                    "VALUES(?,?,?,?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, prog.getAssignedDoctor().getIdMedic());
             preparedStatement.setInt(2, prog.getPatient().getIdPacient());
             preparedStatement.setDate(3, (Date) prog.getDateOfAppointment());
             preparedStatement.setObject(4, prog.getTimeOfAppointment(),JDBCType.TIME);
+            preparedStatement.setString(5,prog.getDiagnostic());
 
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -91,97 +99,77 @@ public class RepoProgramare {
         }
     }
 
-//    public Programare findAppGPById(int id){
+    public boolean deleteAppGPById(int id) {
+        try (Connection connection = DBConfig.getDatabaseConnection()) {
+            String query = "DELETE FROM programari_med_primar WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            return preparedStatement.executeUpdate() != 0;
+        } catch (SQLException exception) {
+            throw new RuntimeException("Something went wrong while trying to delete GP APP " + exception.getMessage());
+        }
+    }
+
+    public boolean deleteAppNurseById(int id) {
+        try (Connection connection = DBConfig.getDatabaseConnection()) {
+            String query = "DELETE FROM programari_asist WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            return preparedStatement.executeUpdate() != 0;
+        } catch (SQLException exception) {
+            throw new RuntimeException("Something went wrong while trying to delete Nurse APP " + exception.getMessage());
+        }
+    }
+
+    public boolean deleteAppPsychById(int id) {
+        try (Connection connection = DBConfig.getDatabaseConnection()) {
+            String query = "DELETE FROM programari_psih WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            return preparedStatement.executeUpdate() != 0;
+        } catch (SQLException exception) {
+            throw new RuntimeException("Something went wrong while trying to delete Psych APP " + exception.getMessage());
+        }
+    }
+
+//    public List<Programare> findAllAppGP()
+//    {
+//        List<Programare> med = new ArrayList<>();
 //        try (Connection connection = DBConfig.getDatabaseConnection()) {
-//            String query = "SELECT * FROM programari_med_primar WHERE id = ?";
-//            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-//            preparedStatement.setInt(1,id);
+//            String query = "SELECT * FROM programari_med_primar";
 //            Statement statement = connection.createStatement();
 //            ResultSet resultSet = statement.executeQuery(query);
 //
-//            if(resultSet.first()) {
-//                return (mapToPacFiz(resultSet));
+//            ServiceMedic serviceMedic = ServiceMedic.getInstance();
+//            ServicePacient servicePacient = ServicePacient.getInstance();
+//
+//            while (resultSet.next()) {
+//
+//                Programare pac = new Programare(serviceMedic.getGPFromDBById(resultSet.getInt(2)), servicePacient.getPatPhysFromDBById(resultSet.getInt(3)), resultSet.getString(4),resultSet.getDate(5), (LocalTime) resultSet.getObject(6));
+//                pac.setIdProgramare(resultSet.getInt(1));
+//                med.add(pac);
 //            }
-//            else return null;
+//
+//            resultSet.close();
+//
 //
 //        } catch (SQLException exception) {
-//            throw new RuntimeException("Something went wrong while tying to get Physical Patient by ID: ");
+//            //throw new RuntimeException("Something went wrong while tying to get all GP Apps: " + exception.printStackTrace());
+//            exception.printStackTrace();
 //        }
+//        return med;
 //    }
 
-//
-//    public boolean updatePatientPhysical(int id, String newAddress) {
-//        try (Connection connection = DBConfig.getDatabaseConnection()) {
-//            String query = "UPDATE pacienti_fiz SET adresa = ? \n" +
-//                    "WHERE id = ?";
-//
-//            PreparedStatement preparedStatement= connection.prepareStatement(query);
-//            preparedStatement.setString(1,newAddress);
-//            preparedStatement.setInt(2, id);
-//
-//            return preparedStatement.executeUpdate() != 0;
-//
-//        } catch (SQLException exception) {
-//            throw new RuntimeException("Something went wrong while tying to update Physical Patient's (id = " + id + ") address");
-//        }
-//    }
-//
-//    public boolean updatePatientMental(int id, String newAddress) {
-//        try (Connection connection = DBConfig.getDatabaseConnection()) {
-//            String query = "UPDATE pacienti_men SET adresa = ? \n" +
-//                    "WHERE id = ?";
-//
-//            PreparedStatement preparedStatement= connection.prepareStatement(query);
-//            preparedStatement.setString(1,newAddress);
-//            preparedStatement.setInt(2, id);
-//
-//            return preparedStatement.executeUpdate() != 0;
-//
-//        } catch (SQLException exception) {
-//            throw new RuntimeException("Something went wrong while tying to update Mental Patient's (id = " + id + ") address");
-//        }
-//    }
-//
-//    public boolean deletePatientPhysicalById(int id) {
-//        try (Connection connection = DBConfig.getDatabaseConnection()) {
-//            String query = "DELETE FROM pacienti_fiz WHERE id = ?";
-//            PreparedStatement preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setInt(1, id);
-//
-//            return preparedStatement.executeUpdate() != 0;
-//        } catch (SQLException exception) {
-//            throw new RuntimeException("Something went wrong while trying to delete Physical Patient " + id);
-//        }
-//    }
-//
-//    public boolean deletePatientMentalById(int id) {
-//        try (Connection connection = DBConfig.getDatabaseConnection()) {
-//            String query = "DELETE FROM pacienti_men WHERE id = ?";
-//            PreparedStatement preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setInt(1, id);
-//
-//            return preparedStatement.executeUpdate() != 0;
-//        } catch (SQLException exception) {
-//            throw new RuntimeException("Something went wrong while trying to delete Mental Patient " + id);
-//        }
-//    }
-//
 //    private Programare mapToProgGP(ResultSet resultSet) throws SQLException {
-//        Programare pac = new Programare();
-//        pac.setIdPacient(resultSet.getInt(1));
-//        return pac;
+//        ServicePacient servicePacient = ServicePacient.getInstance();
+//        ServiceMedic serviceMedic = ServiceMedic.getInstance();
+//
+//        //return pac;
 //    }
-//
-//    private PacientSanatateMentala mapToPacMen(ResultSet resultSet1, ResultSet resultSet2) throws SQLException {
-//
-//        Vector<String> med = new Vector<>();
-//        while (resultSet2.next()) {
-//            med.add(resultSet2.getString(2));
-//        }
-//
-//        PacientSanatateMentala pac = new PacientSanatateMentala(resultSet1.getString(2),resultSet1.getString(3),resultSet1.getString(4),resultSet1.getString(5), resultSet1.getInt(6), resultSet1.getString(7),med.size(),med);
-//        pac.setIdPacient(resultSet1.getInt(1));
-//        return pac;
-//    }
+
+
 }
 

@@ -167,3 +167,122 @@ Return Mental patients from DB, 2021-05-26 02:39:31.175
 Return Mental patients from DB, 2021-05-26 02:45:01.636
 Return Mental patients from DB, 2021-05-26 02:45:20.238
 Remove GP from DB by ID, 2021-05-26 03:18:01.215
+Return Mental patients from DB, 2021-05-26 14:25:00.449
+Return Physical patients from DB, 2021-05-26 14:25:00.539
+Return Physical patients from DB, 2021-05-26 14:25:31.539
+Return Mental patients from DB, 2021-05-26 14:25:31.643
+Return Physical patients from DB, 2021-05-26 14:30:21.259
+Return Mental patients from DB, 2021-05-26 14:30:21.375
+Return Physical patients from DB, 2021-05-26 14:30:55.47
+Return Mental patients from DB, 2021-05-26 14:30:55.572
+Return Physical patients from DB, 2021-05-26 14:32:43.658
+Return Mental patients from DB, 2021-05-26 14:32:43.808
+Return Physical patients from DB, 2021-05-26 14:37:08.515
+Return Mental patients from DB, 2021-05-26 14:37:08.974
+Return Physical patients from DB, 2021-05-26 14:39:02.266
+Return Mental patients from DB, 2021-05-26 14:39:02.377
+Return Physical patients from DB, 2021-05-26 14:40:48.007
+Return Mental patients from DB, 2021-05-26 14:40:48.109
+Return Physical patients from DB, 2021-05-26 14:41:32.647
+Return Mental patients from DB, 2021-05-26 14:41:32.746
+Return Physical patients from DB, 2021-05-26 14:41:56.167
+Return Mental patients from DB, 2021-05-26 14:41:56.439
+Return Physical patients from DB, 2021-05-26 14:42:27.87
+Return Mental patients from DB, 2021-05-26 14:42:27.971
+Return Mental patients from DB, 2021-05-26 14:43:19.543
+Return Mental patients from DB, 2021-05-26 14:44:24.238
+Return Mental patients from DB, 2021-05-26 14:45:53.252
+Return Mental patients from DB, 2021-05-26 14:52:57.44
+Return Mental patients from DB, 2021-05-26 14:53:48.408
+Remove Mental Pat from DB by ID, 2021-05-26 15:03:04.931
+Remove Mental Pat from DB by ID, 2021-05-26 15:03:33.008
+Return Physical patient by Id from DB, 2021-05-26 15:57:29.863
+Return GPs from DB, 2021-05-26 15:57:29.911
+Return GP by Id from DB, 2021-05-26 15:57:33.942
+Return Physical patient by Id from DB, 2021-05-26 16:05:45.99
+Return GPs from DB, 2021-05-26 16:05:46.04
+Return GP by Id from DB, 2021-05-26 16:05:47.588
+Return Physical patient by Id from DB, 2021-05-26 16:17:56.571
+Return GPs from DB, 2021-05-26 16:17:56.62
+Return GP by Id from DB, 2021-05-26 16:17:58.751
+Return Physical patient by Id from DB, 2021-05-26 16:18:56.7
+Return GPs from DB, 2021-05-26 16:18:56.757
+Return GP by Id from DB, 2021-05-26 16:18:57.576
+Return Physical patient by Id from DB, 2021-05-26 16:20:12.262
+Return GPs from DB, 2021-05-26 16:20:12.314
+Return GP by Id from DB, 2021-05-26 16:20:13.97
+Return Physical patient by Id from DB, 2021-05-26 16:23:52.339
+Return GPs from DB, 2021-05-26 16:23:52.391
+Return GP by Id from DB, 2021-05-26 16:23:53.705
+Return Physical patient by Id from DB, 2021-05-26 16:26:29.794
+Return GPs from DB, 2021-05-26 16:26:29.842
+Return GP by Id from DB, 2021-05-26 16:26:31.117
+Return Physical patient by Id from DB, 2021-05-26 16:29:36.533
+Return GPs from DB, 2021-05-26 16:29:36.58
+Return GP by Id from DB, 2021-05-26 16:29:37.926
+Return Physical patient by Id from DB, 2021-05-26 16:31:01.324
+Return GPs from DB, 2021-05-26 16:31:01.378
+Return GP by Id from DB, 2021-05-26 16:31:03.033
+Add Appointment on Console, 2021-05-26 16:31:21.063
+Return Physical patient by Id from DB, 2021-05-26 16:38:33.08
+Return Nurses from DB, 2021-05-26 16:38:33.135
+Return Physical patient by Id from DB, 2021-05-26 16:39:09.12
+Return GPs from DB, 2021-05-26 16:39:09.172
+Return GP by Id from DB, 2021-05-26 16:39:17.793
+Add Appointment for GP DB, 2021-05-26 16:39:56.955
+Return Physical patient by Id from DB, 2021-05-26 16:43:15.958
+Return Nurses from DB, 2021-05-26 16:43:16.006
+Return Nurse by Id from DB, 2021-05-26 16:43:24.152
+Return Physical patient by Id from DB, 2021-05-26 16:54:04.947
+Return Physical patient by Id from DB, 2021-05-26 16:56:00.53
+Return Physical patient by Id from DB, 2021-05-26 16:58:26.898
+Return Nurses from DB, 2021-05-26 16:58:26.956
+Return Physical patient by Id from DB, 2021-05-26 16:59:40.17
+Return Nurses from DB, 2021-05-26 16:59:40.219
+Return Physical patient by Id from DB, 2021-05-26 17:01:38.017
+Return Psychs from DB, 2021-05-26 17:01:38.066
+Return Psych by Id from DB, 2021-05-26 17:01:43.294
+Return Physical patient by Id from DB, 2021-05-26 17:03:06.913
+Return Psychs from DB, 2021-05-26 17:03:06.965
+Return Psych by Id from DB, 2021-05-26 17:03:09.124
+Add Appointment for Nurse on DB, 2021-05-26 17:03:32.42
+Return Physical patient by Id from DB, 2021-05-26 17:04:59.987
+Return Psychs from DB, 2021-05-26 17:05:00.044
+Return Psych by Id from DB, 2021-05-26 17:05:01.579
+Return Physical patient by Id from DB, 2021-05-26 17:06:16.083
+Return Psychs from DB, 2021-05-26 17:06:16.132
+Return Psych by Id from DB, 2021-05-26 17:06:17.735
+Add Appointment for Nurse on DB, 2021-05-26 17:06:28.88
+Return Physical patients from DB, 2021-05-26 17:29:41.572
+Return Physical patients from DB, 2021-05-26 17:30:25.54
+Return Physical patients from DB, 2021-05-26 17:37:44.738
+Return Physical patients from DB, 2021-05-26 17:39:52.123
+Return Physical patients from DB, 2021-05-26 17:40:58.747
+Return Physical patients from DB, 2021-05-26 17:43:59.148
+Return GP by Id from DB, 2021-05-26 17:43:59.225
+Return Physical patients from DB, 2021-05-26 17:47:59.025
+Return GP by Id from DB, 2021-05-26 17:47:59.09
+Return Physical patients from DB, 2021-05-26 17:50:13.835
+Return GP by Id from DB, 2021-05-26 17:50:13.899
+Add GB to DB, 2021-05-26 18:47:00.486
+Add Nurse to DB, 2021-05-26 18:47:42.83
+Add Psych to DB, 2021-05-26 18:48:25.305
+Add Patient fiz to DB, 2021-05-26 18:49:12.91
+Add Patient on Console, 2021-05-26 18:50:32.422
+Return Physical patient by Id from DB, 2021-05-26 18:51:28.704
+Return GPs from DB, 2021-05-26 18:51:28.716
+Return GP by Id from DB, 2021-05-26 18:51:38.069
+Return Physical patient by Id from DB, 2021-05-26 18:53:26.284
+Return GPs from DB, 2021-05-26 18:53:26.339
+Return GP by Id from DB, 2021-05-26 18:53:28.256
+Add Appointment for GP DB, 2021-05-26 18:53:46.764
+Return Physical patient by Id from DB, 2021-05-26 18:54:35.465
+Return Nurses from DB, 2021-05-26 18:54:35.475
+Return Nurse by Id from DB, 2021-05-26 18:54:41.482
+Add Appointment for Nurse on DB, 2021-05-26 18:55:04.04
+Return Physical patient by Id from DB, 2021-05-26 18:55:52.475
+Return Psychs from DB, 2021-05-26 18:55:52.485
+Return Psych by Id from DB, 2021-05-26 18:55:55.55
+Add Appointment for Nurse on DB, 2021-05-26 18:56:16.847
+Return GPs from DB, 2021-05-26 18:56:24.473
+Remove GP from DB by ID, 2021-05-26 18:58:02.078

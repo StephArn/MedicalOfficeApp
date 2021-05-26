@@ -108,11 +108,11 @@ public class RepoPacient {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            String query1 = "SELECT * FROM medicamente_men WHERE id_pacient = ?";
+            String query1 = "SELECT * FROM medicamente_men WHERE id_pacient=?";
             PreparedStatement preparedStatement1 = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement1.setInt(1,id);
-            Statement statement1 = connection.createStatement();
-            ResultSet resultSet2 = statement1.executeQuery(query1);
+            preparedStatement1.setInt(1, id);
+            ResultSet resultSet2 = preparedStatement1.executeQuery();
+            //return (mapToPacMen(resultSet,resultSet2));
 
             Vector<String> meds = new Vector<>();
 
@@ -124,11 +124,11 @@ public class RepoPacient {
                 med = new PacientSanatateMentala(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6),resultSet.getString(7),meds.size(),meds);
                 med.setIdPacient(resultSet.getInt(1));
             }
-            resultSet.close();
+            return med;
+
         } catch (SQLException exception) {
             throw new RuntimeException("Something went wrong while trying to get Men Pat " + id + exception.getMessage());
         }
-        return med;
     }
 //
 //    public PacientSanatateMentala findPatientMentalById(int id){
@@ -186,19 +186,28 @@ public class RepoPacient {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+                    //PacientSanatateMentala medi = new PacientSanatateMentala(resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6),resultSet.getString(7),3,new Vector<String>());
+                    //medi.setIdPacient(resultSet.getInt(1));
+                System.out.println(resultSet.getInt(1));
                 String query1 = "SELECT * FROM medicamente_men WHERE id_pacient=?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
-                preparedStatement.setInt(1,resultSet.getInt(1));
-                statement = connection.createStatement();
-                ResultSet resultSet2 = statement.executeQuery(query);
+                preparedStatement.setInt(1, resultSet.getInt(1));
+                ResultSet resultSet2 = preparedStatement.executeQuery();
                 med.add(mapToPacMen(resultSet,resultSet2));
+//                Vector<String> meds = new Vector<>();
+//
+//                while (resultSet2.next()) {
+//                    meds.add(resultSet2.getString(2));
+//                }
+//                System.out.println(meds);
+                //med.add(medi);
             }
 
             resultSet.close();
             return med;
 
         } catch (SQLException exception) {
-            throw new RuntimeException("Something went wrong while tying to get all Mental Patients: ");
+            throw new RuntimeException("Something went wrong while tying to get all Mental Patients: "+exception.getMessage());
         }
     }
 
@@ -275,7 +284,7 @@ public class RepoPacient {
 
         PacientSanatateMentala pac = new PacientSanatateMentala(resultSet1.getString(2),resultSet1.getString(3),resultSet1.getString(4),resultSet1.getString(5), resultSet1.getInt(6), resultSet1.getString(7),med.size(),med);
         pac.setIdPacient(resultSet1.getInt(1));
-        System.out.println("Da3");
+        //System.out.println("Da3");
         return pac;
     }
 }
