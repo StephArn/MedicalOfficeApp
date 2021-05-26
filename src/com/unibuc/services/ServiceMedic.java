@@ -1,13 +1,17 @@
 package com.unibuc.services;
 
+import com.unibuc.database.repository.RepoMedic;
 import com.unibuc.io.WriteCSV;
 import com.unibuc.medical_staff.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class ServiceMedic {
+
+    static RepoMedic repoMedic = new RepoMedic();
 
     private ArrayList<CadruMedical> staff;
     private static ServiceMedic instance = null;
@@ -27,6 +31,24 @@ public class ServiceMedic {
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Return Staff");
         return staff;
+    }
+
+    public List<MedicPrimar> getGPsFromDB() {
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return GPs from DB");
+        return repoMedic.findAllGPs();
+    }
+
+    public List<Asistent> getNursesFromDB() {
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Nurses from DB");
+        return repoMedic.findAllNurses();
+    }
+
+    public List<Psihiatru> getPsychFromDB() {
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Psychs from DB");
+        return repoMedic.findAllPsych();
     }
 
     public CadruMedical searchStaffByID (int id) {
@@ -104,17 +126,172 @@ public class ServiceMedic {
         out.writeAudit("Add Staff on Console");
     }
 
-    public void removeMedicalStaffByID() {
+    public void addGPToDB() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
-        System.out.print("Type ID for the staff member you want to remove:");
+        System.out.println("Personal data:");
+        System.out.print("Name: ");
+        String name = scanner.next();
+        System.out.print("Gender: ");
+        String gender = scanner.next();
+        System.out.print("Address: ");
+        String address = scanner.next();
+        System.out.print("Age: ");
+        int age = scanner.nextInt();
+        System.out.print("Base Salary: ");
+        double baseSalary = scanner.nextDouble();
+        System.out.print("What is their specialisation?");
+        String specialisation = scanner.next();
+        System.out.print("What is their experience level? Type 0 for under 5 years of experience, 1 for 5-9 years, 2 for 10-14, or 3 for 15+.");
+        int lvlgp = scanner.nextInt();
+        MedicPrimar gp = new MedicPrimar(name, gender, address, age, baseSalary,specialisation, lvlgp);
+        repoMedic.saveGP(gp);
+        //CadruMedical gp1 = new MedicPrimar(name, gender, address, age, baseSalary,specialisation, lvlgp);
+        staff.add(gp);
+        System.out.println("Success!");
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add GB to DB");
+    }
+
+    public void addNurseToDB() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Personal data:");
+        System.out.print("Name: ");
+        String name = scanner.next();
+        System.out.print("Gender: ");
+        String gender = scanner.next();
+        System.out.print("Address: ");
+        String address = scanner.next();
+        System.out.print("Age: ");
+        int age = scanner.nextInt();
+        System.out.print("Base Salary: ");
+        double baseSalary = scanner.nextDouble();
+        System.out.print("What is their experience level? Type 0 for under 5 years of experience, 1 for 5-9 years, 2 for 10-14, or 3 for 15+.");
+        int lvl = scanner.nextInt();
+        Asistent nurse = new Asistent(name, gender, address, age, baseSalary, lvl);
+        repoMedic.saveNurse(nurse);
+        staff.add(nurse);
+        System.out.println("Success!");
+
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Nurse to DB");
+    }
+
+    public void addPsychToDB() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Personal data:");
+        System.out.print("Name: ");
+        String name = scanner.next();
+        System.out.print("Gender: ");
+        String gender = scanner.next();
+        System.out.print("Address: ");
+        String address = scanner.next();
+        System.out.print("Age: ");
+        int age = scanner.nextInt();
+        System.out.print("Base Salary: ");
+        double baseSalary = scanner.nextDouble();
+        System.out.print("What is their experience level? Type 0 for under 5 years of experience, 1 for 5-9 years, 2 for 10-14, or 3 for 15+.");
+        int lvlp = scanner.nextInt();
+        Psihiatru psychiatrist = new Psihiatru(name, gender, address, age, baseSalary, lvlp);
+        repoMedic.savePsych(psychiatrist);
+        staff.add(psychiatrist);
+        System.out.println("Success!");
+
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Psych to DB");
+    }
+
+//    public void removeMedicalStaffByID() {
+//        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+//
+//        System.out.print("Type ID for the staff member you want to remove:");
+//        int del = scanner.nextInt();
+//        CadruMedical med = searchStaffByID(del);
+//        if (med == null)
+//            return;
+//        staff.remove(med);
+//        WriteCSV out = WriteCSV.getInstance();
+//        out.writeAudit("Remove Staff by ID");
+//    }
+
+    public void removeGPFromDByID() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.print("Type ID for the GP you want to remove:");
         int del = scanner.nextInt();
-        CadruMedical med = searchStaffByID(del);
+        MedicPrimar med = repoMedic.findGPById(del);
+        if (med == null)
+            return;
+        repoMedic.deleteGPById(del);
+        staff.remove(med);
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Remove GP from DB by ID");
+    }
+
+    public void removeNurseFromDByID() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.print("Type ID for the nurse you want to remove:");
+        int del = scanner.nextInt();
+        Asistent med = repoMedic.findNurseById(del);
         if (med == null)
             return;
         staff.remove(med);
+        repoMedic.deleteNurseById(del);
         WriteCSV out = WriteCSV.getInstance();
-        out.writeAudit("Remove Staff by ID");
+        out.writeAudit("Remove nurse from DB by ID");
+    }
+
+    public void removePsychFromDByID() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.print("Type ID for the psychiatrist you want to remove: ");
+        int del = scanner.nextInt();
+        Psihiatru med = repoMedic.findPsychById(del);
+        if (med == null)
+            return;
+        staff.remove(med);
+        repoMedic.deletePsychById(del);
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Remove psych from DB by ID");
+    }
+
+    public void changeGPAddress() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        System.out.println("Type the ID of the GP whose address you want to change: ");
+        int id = scanner.nextInt();
+        System.out.println("Type the new address: ");
+        String newAddress = scanner.next();
+        if(repoMedic.updateGP(id,newAddress))
+            System.out.println("Success!");
+        else
+            System.out.println("Couldn't change the address...");
+    }
+
+    public void changeNurseAddress() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        System.out.println("Type the ID of the nurse whose address you want to change: ");
+        int id = scanner.nextInt();
+        System.out.println("Type the new address: ");
+        String newAddress = scanner.next();
+        if(repoMedic.updateNurse(id,newAddress))
+            System.out.println("Success!");
+        else
+            System.out.println("Couldn't change the address...");
+    }
+
+    public void changePsychAddress() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        System.out.println("Type the ID of the psychiatrist whose address you want to change: ");
+        int id = scanner.nextInt();
+        System.out.println("Type the new address: ");
+        String newAddress = scanner.next();
+        if(repoMedic.updatePsych(id,newAddress))
+            System.out.println("Success!");
+        else
+            System.out.println("Couldn't change the address...");
     }
 
     public void sortMedicalStaffByAgeAndName()

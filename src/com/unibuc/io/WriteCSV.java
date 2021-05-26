@@ -1,5 +1,6 @@
 package com.unibuc.io;
 
+import com.unibuc.appointment.Programare;
 import com.unibuc.medical_staff.Asistent;
 import com.unibuc.medical_staff.MedicPrimar;
 import com.unibuc.medical_staff.Psihiatru;
@@ -22,7 +23,7 @@ public class WriteCSV {
 
     public void writeGPOnCSV(MedicPrimar med) {
         try (var out = new BufferedWriter(new FileWriter("src/com/unibuc/io/med_primar_write.csv",true))) {
-            out.write(med.getIdMedic() + ", " + med.getName() + ", " + med.getGender() + ", " + med.getAddress() + ", " + med.getAge() +  ", " + med.getspecialisation() + ", " + med.calculateSalary() + '\n');
+            out.write(med.getIdMedic() + ", " + med.getName() + ", " + med.getGender() + ", " + med.getAddress() + ", " + med.getAge() +  ", " + med.getSpecialisation() + ", " + med.calculateSalary() + '\n');
         } catch (IOException e) {
             System.out.println("Writing Exception: "+ e.getMessage());
         }
@@ -66,6 +67,14 @@ public class WriteCSV {
             out.write(operation + ", " + timestamp.toString() + "\n");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void writeAppOnCSV(Programare prog) {
+        try (var out = new BufferedWriter(new FileWriter("src/com/unibuc/io/app_write.csv",true))) {
+            out.write(prog.getIdProgramare() + ", " + prog.getAssignedDoctor().getIdMedic() + ", " + prog.getPatient().getIdPacient() + ", " + prog.getDateOfAppointment() + ", " + prog.getTimeOfAppointment() + ", " + prog.getDiagnostic() + '\n');
+        } catch (IOException e) {
+            System.out.println("Writing Exception: "+ e.getMessage());
         }
     }
 

@@ -40,7 +40,7 @@ public class PacientSanatateMentala extends Pacient{
 
     @Override
     public String toString() {
-        return "Pacient Sectia Sanatate Fizica \n" +
+        return "Pacient Sectia Sanatate Mentala \n" +
                 " ID: " + idPacient + '\n' +
                 " Nume: " + name + '\n' +
                 " Gen: " + gender + '\n' +

@@ -21,7 +21,9 @@ public abstract class Pacient extends Persoana {
         return idPacient;
     }
 
-    //public abstract void showPatient();
+    public void setIdPacient(int id){
+        this.idPacient = id;
+    }   //public abstract void showPatient();
 
 //    public void setName(String name) {
 //        this.name = name;

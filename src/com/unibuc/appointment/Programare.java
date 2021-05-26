@@ -39,6 +39,10 @@ public class Programare {
         return idProgramare;
     }
 
+    public void setIdProgramare(int idProgramare) {
+        this.idProgramare = idProgramare;
+    }
+
     public CadruMedical getAssignedDoctor() {
         return assignedDoctor;
     }
@@ -54,14 +58,6 @@ public class Programare {
     public void setPatient(Pacient patient) {
         this.patient = patient;
     }
-
-    //public LocalDateTime getTimeOfAppointment() {
-//        return timeOfAppointment;
-//    }
-
-//    public void setTimeOfAppointment(LocalDateTime timeOfAppointment) {
-//        this.timeOfAppointment = timeOfAppointment;
-//    }
 
     public Date getDateOfAppointment() {
         return dateOfAppointment;
@@ -85,5 +81,17 @@ public class Programare {
 
     public void setDiagnostic(String diagnostic) {
         this.diagnostic = diagnostic;
+    }
+
+    @Override
+    public String toString() {
+        return "Programare \n" +
+                " ID Programare: " + idProgramare + '\n' +
+                " ID Medic: " + assignedDoctor.getIdMedic() + '\n' +
+                " ID Medic: " + patient.getIdPacient() + '\n' +
+                " Data: " + dateOfAppointment + '\n' +
+                " Ora: " + timeOfAppointment + '\n' +
+                " Diagnostic: " + diagnostic + '\n' +
+                "----------\n";
     }
 }

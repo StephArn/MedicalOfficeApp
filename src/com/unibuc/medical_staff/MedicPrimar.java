@@ -35,11 +35,11 @@ public class MedicPrimar extends CadruMedical{
         System.out.println(" Salariu: " + calculateSalary() + "\n----------\n");
     }
 
-    public String getspecialisation() {
+    public String getSpecialisation() {
         return specialisation;
     }
 
-    public void setspecialisation(String specialisation) {
+    public void setSpecialisation(String specialisation) {
         this.specialisation = specialisation;
     }
 

@@ -1,14 +1,17 @@
 package com.unibuc.services;
 
+import com.unibuc.database.repository.RepoMedic;
+import com.unibuc.database.repository.RepoPacient;
 import com.unibuc.io.WriteCSV;
+import com.unibuc.medical_staff.MedicPrimar;
+import com.unibuc.medical_staff.Psihiatru;
 import com.unibuc.patient.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 public class ServicePacient {
+
+    static RepoPacient repoPacient = new RepoPacient();
 
     private ArrayList<Pacient> patients;
     private static ServicePacient instance = null;
@@ -54,6 +57,17 @@ public class ServicePacient {
         out.writeAudit("Show Patients");
     }
 
+    public List<PacientSanatateFizica> getPatPhysFromDB() {
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Physical patients from DB");
+        return repoPacient.findAllPatientPhysical();
+    }
+
+    public List<PacientSanatateMentala> getPatMenFromDB() {
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Return Mental patients from DB");
+        return repoPacient.findAllPatientMental();
+    }
 
     public void addPatient(){
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
@@ -109,6 +123,71 @@ public class ServicePacient {
 
     }
 
+    public void addPatientPhysicalToDB(){
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Personal data");
+        System.out.print("Name: ");
+        String name = scanner.next();
+        System.out.print("Gender: ");
+        String gender= scanner.next();
+        System.out.print("Address: ");
+        String address= scanner.next();
+        System.out.print("ID Card Number: ");
+        String idCard = scanner.next();
+        System.out.print("Age: ");
+        int age = scanner.nextInt();
+        System.out.print("Insurance Number: ");
+        String insurance = scanner.next();
+        PacientSanatateFizica fiz = new PacientSanatateFizica(name, gender, address, idCard, age, insurance);
+        patients.add(fiz);
+        repoPacient.savePatientPhysical(fiz);
+        System.out.println("Success!");
+
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Patient fiz to DB");
+    }
+
+    public void addPatientMentalToDB(){
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Personal data");
+        System.out.print("Name: ");
+        String name = scanner.next();
+        System.out.print("Gender: ");
+        String gender= scanner.next();
+        System.out.print("Address: ");
+        String address= scanner.next();
+        System.out.print("ID Card Number: ");
+        String idCard = scanner.next();
+        System.out.print("Age: ");
+        int age = scanner.nextInt();
+        System.out.print("What is their previous diagnostic?");
+        String prev = scanner.next();
+        System.out.print("How many medications do they take? If none, type 0.");
+        int nrmeds = scanner.nextInt();
+        Vector<String> meds;
+        if(nrmeds != 0)
+        {
+            System.out.print("State the names of the medications one by one: ");
+            meds = new Vector<String>();
+            for(int i = 0; i < nrmeds; i++){
+                meds.add(scanner.next());
+                    }
+                }
+        else{
+            meds = new Vector<String>();
+                }
+        PacientSanatateMentala men = new PacientSanatateMentala(name, gender, address, idCard, age, prev, nrmeds, meds);
+        patients.add(men);
+        repoPacient.savePatientMental(men);
+        System.out.println("Success!");
+
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Patient on Console");
+
+    }
+
     public void removePatientByID() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
@@ -120,6 +199,58 @@ public class ServicePacient {
         patients.remove(med);
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Remove Patient");
+    }
+
+    public void changePatPhysAddress() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        System.out.println("Type the ID of the Physical Patient whose address you want to change: ");
+        int id = scanner.nextInt();
+        System.out.println("Type the new address: ");
+        String newAddress = scanner.next();
+        if(repoPacient.updatePatientPhysical(id,newAddress))
+            System.out.println("Success!");
+        else
+            System.out.println("Couldn't change the address...");
+    }
+
+    public void changePatMenAddress() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        System.out.println("Type the ID of the Mental Patient whose address you want to change: ");
+        int id = scanner.nextInt();
+        System.out.println("Type the new address: ");
+        String newAddress = scanner.next();
+        if(repoPacient.updatePatientMental(id,newAddress))
+            System.out.println("Success!");
+        else
+            System.out.println("Couldn't change the address...");
+    }
+
+    public void removePatPhysFromDByID() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.print("Type ID for the Physical Patient you want to remove:");
+        int del = scanner.nextInt();
+        PacientSanatateFizica med = repoPacient.findPatientPhysicalById(del);
+        if (med == null)
+            return;
+        repoPacient.deletePatientPhysicalById(del);
+        patients.remove(med);
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Remove Phys Pat from DB by ID");
+    }
+
+    public void removePatMenFromDByID() {
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.print("Type ID for the Mental Patient you want to remove:");
+        int del = scanner.nextInt();
+        PacientSanatateMentala med = repoPacient.findPatientMentalById(del);
+        if (med == null)
+            return;
+        repoPacient.deletePatientMentalById(del);
+        patients.remove(med);
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Remove Mental Pat from DB by ID");
     }
 
     public void sortPatientsByAgeAndName()

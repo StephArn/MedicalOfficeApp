@@ -35,6 +35,10 @@ public abstract class CadruMedical extends Persoana {
         return idMedic;
     }
 
+    public void setIdMedic(int id){
+        this.idMedic = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -66,9 +70,9 @@ public abstract class CadruMedical extends Persoana {
 //    public void setAge(int age) {
 //        this.age = age;
 //    }
-//    public double getBaseSalary() {
-//        return baseSalary;
-//    }
+    public double getBaseSalary() {
+        return baseSalary;
+    }
 //
 //    public void setBaseSalary(double baseSalary) {
 //        this.baseSalary = baseSalary;

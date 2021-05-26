@@ -86,7 +86,7 @@ public class ServiceProgramare {
                 System.out.println("For Mental Examination, there is a Psychiatrist needed. Please look through the list of staff and type the ID of the Psychiatrist you would like.\n");
                 staff.showMedicalStaffList();
                 int idp = scanner.nextInt();
-                while (!(staff.searchStaffByID(idp) instanceof  MedicPrimar)) {
+                while (!(staff.searchStaffByID(idp) instanceof  Psihiatru)) {
                     System.out.println("Sorry, that's not a valid ID.");
                     idn = scanner.nextInt();
                 }
@@ -102,7 +102,7 @@ public class ServiceProgramare {
         System.out.println("Date (Format as dd/mm/yyyy) : ");
         String date1 = scanner.next();
         Date date=new SimpleDateFormat("dd/MM/yyyy").parse(date1);
-        System.out.println("Time (Format as hh/mm/ss) : ");
+        System.out.println("Time (Format as HH'h' MM'm' SS's') : ");
         String time1 = scanner.next();
         LocalTime time = LocalTime.parse(time1, DateTimeFormatter.ofPattern("HH'h 'mm'm 'ss's'"));
         Programare prog = new Programare(app,p,diag,date,time);
@@ -124,6 +124,20 @@ public class ServiceProgramare {
         appointments.remove(med);
         WriteCSV out = WriteCSV.getInstance();
         out.writeAudit("Remove Appointment by ID");
+    }
+
+    public void addAppointmentFromCSV(Programare prog) {
+        boolean already = false;
+        for (Programare a : appointments)
+            if (a.equals(prog)) {
+                already = true;
+                break;
+            }
+        if (!already) {
+            appointments.add(prog);
+        }
+        WriteCSV out = WriteCSV.getInstance();
+        out.writeAudit("Add Appointment from CSV");
     }
 
 
